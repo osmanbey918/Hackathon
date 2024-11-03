@@ -1,0 +1,117 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: transparent;
+  /* Dark Blue-Grey */
+  color: #ecf0f1; /* Light Gray */
+  position: relative;
+  font-family: 'Arial', sans-serif;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.navbar-brand .navbar-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand .navbar-title:hover {
+  color: #1abc9c; /* Teal */
+}
+
+/* Toggle Button for Mobile */
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+}
+
+.navbar-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #ecf0f1;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: transform 0.3s ease;
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+  list-style: none;
+}
+
+.navbar-links li {
+  margin: 0 15px;
+}
+
+.navbar-links a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #1abc9c;
+}
+
+/* Active and Open States */
+.navbar.open .navbar-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background-color: #34495e;
+  padding: 20px 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.navbar.open .navbar-links li {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.navbar-toggle.active .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar.open .navbar-links {
+    display: flex;
+  }
+}
