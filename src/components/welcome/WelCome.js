@@ -11,7 +11,7 @@ const WelCome = () => {
             Discover our exquisite menu and enjoy the finest culinary experience in town.
           </p>
           <div className="welcome-buttons">
-            <Link to="/menu" className="welcome-button">
+            <Link to="/menupage" className="welcome-button">
               View Menu
             </Link>
             <Link to="/reserve" className="welcome-button">

@@ -13,9 +13,10 @@ export default function Home() {
   return (
     <div className="home-container">
       <MenuPage />
-      <div className='abou'>
-        <About /></div>
-      <ContactUs />
+      {/* <div className='abou'>
+        <About />
+      </div>
+      <ContactUs /> */}
     </div>
   );
 }

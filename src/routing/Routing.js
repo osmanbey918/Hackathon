@@ -30,11 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/menupage",
-    element: <PublicRoute><MenuPage /></PublicRoute>
+    element: <PrivateRoute><MenuPage /></PrivateRoute>
   },
   {
     path: "/about",
-    element: <PublicRoute><About/></PublicRoute>
+    element: <PrivateRoute><About/></PrivateRoute>
   },
 ]);
 

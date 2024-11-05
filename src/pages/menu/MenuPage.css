@@ -159,6 +159,7 @@
   align-items: center;
   height: 100vh;
   width: 100%;
+  background: rgb(209, 52, 52);
   /* background: url('/images/restaurant-bg.jpg') no-repeat center center/cover; */
   position: relative;
 }
@@ -169,7 +170,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+  background: rgba(88, 88, 88, 0.282);
 }
 
 .welcome-content {
