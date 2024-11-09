@@ -91,9 +91,11 @@ const MenuPage = () => {
 
   return (
     <div className='bgg'>
-      <Navbar />
-      <div className="menu-container">
+      <div className='wel-bg'>
+        <Navbar />
         <WelCome />
+      </div>
+      <div className="menu-container">
         <h2>Restaurant Menu</h2>
         <input
           type="text"
@@ -164,7 +166,7 @@ const MenuPage = () => {
           <button type="submit">Add New Item</button>
         </form>
 
-        {/* Category heading */}
+
         {selectedCategory !== 'All' && (
           <h3 className="category-heading">{selectedCategory}</h3>
         )}

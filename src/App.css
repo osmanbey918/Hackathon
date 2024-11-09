@@ -1,6 +1,15 @@
 /* Home.css */
 .hotel {
-  /* background: url("./assets/hotel-bg.jpg"); */
+  /* background: url("./assets/hotel-bg.jpg");
+  background-size: cover; */
+}
+
+.bgg {
+  border: 2px solid red;
+}
+
+.wel-bg {
+  background: url("./assets/hotel-bg.jpg");
   background-size: cover;
 }
 
@@ -20,8 +29,9 @@
   font-weight: bold;
   margin-bottom: 20px;
   color: white;
-  
+
 }
+
 .signup-box {
   background: rgba(135, 135, 135, 0.462);
   border-radius: 8px;
@@ -61,6 +71,7 @@
   font-weight: 300;
   opacity: 1;
 }
+
 .gender-section {
   display: flex;
   justify-content: space-around;
@@ -102,6 +113,7 @@
 
   transform: translateY(-2px);
 }
+
 .loading {
   margin-top: 15px;
 }
@@ -117,6 +129,7 @@
     font-size: 2rem;
   }
 }
+
 /* Container Styling */
 .login-container {
   display: flex;
@@ -219,6 +232,7 @@
     font-size: 2rem;
   }
 }
+
 /* Container Styling */
 .menu-container {
   display: flex;
@@ -227,6 +241,10 @@
   padding: 20px;
   color: #ffffff;
   background-color: red;
+  background: url("./assets//OIP.jpeg");
+  background-size: cover;
+  width: 100%;
+
   backdrop-filter: blur(10px);
 }
 

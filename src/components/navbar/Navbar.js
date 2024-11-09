@@ -18,29 +18,31 @@ const Navbar = () => {
   };
   return (
     <nav className={`navbar ${isOpen ? 'open' : ''}`}>
-      <div className="navbar-brand">
-        <Link to="/" className="navbar-title">Dubai Restaurant</Link>
+      <div className='nav-overlay'>
+        <div className="navbar-brand">
+          <Link to="/" className="navbar-title">Dubai Restaurant</Link>
+        </div>
+        <div className={`navbar-toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+        <ul className={`navbar-links ${isOpen ? 'active' : ''}`}>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/menupage">Menu</Link>
+          </li>
+          <li>
+            <Link to="/ContectUs">Contact</Link>
+          </li>
+          <li><button onClick={handleLogout} className="logout-button">Logout</button></li>
+        </ul>
       </div>
-      <div className={`navbar-toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </div>
-      <ul className={`navbar-links ${isOpen ? 'active' : ''}`}>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/menupage">Menu</Link>
-        </li>
-        <li>
-          <Link to="/ContectUs">Contact</Link>
-        </li>
-        <li><button onClick={handleLogout} className="logout-button">Logout</button></li>
-      </ul>
     </nav>
   );
 };
