@@ -96,8 +96,8 @@ const MenuPage = () => {
         <WelCome />
       </div>
       <div className="menu-container">
-        <h2>Restaurant Menu</h2>
-        <input
+        <h2>Menu</h2>
+        {/* <input
           type="text"
           placeholder="Search for dishes..."
           className="search-bar"
@@ -169,17 +169,20 @@ const MenuPage = () => {
 
         {selectedCategory !== 'All' && (
           <h3 className="category-heading">{selectedCategory}</h3>
-        )}
+        )} */}
 
         <div className="menu-grid">
           {filteredMenuItems.map((item) => (
             <div className="menu-card" key={item.id}>
-              <img src={item.image} alt={item.title} className="menu-image" />
+              <div className='img-card'>
+                <img src={item.image} alt={item.title} className="menu-image" />
+              </div>
               <h3 className="menu-title">{item.title}</h3>
               <p className="menu-price">{item.price}</p>
               <button className="order-button">Order Now</button>
-              <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button>
+              {/* <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button> */}
+              {/* <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button> */}
+
             </div>
           ))}
         </div>
