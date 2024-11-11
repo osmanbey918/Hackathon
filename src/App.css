@@ -248,12 +248,7 @@
   backdrop-filter: blur(10px);
 }
 
-.menu-container h2 {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
+
 
 /* Search Bar */
 .search-bar {
@@ -287,7 +282,7 @@
   backdrop-filter: blur(8px);
 }
 
-/* Menu Grid */
+/* 
 .menu-grid {
   display: grid;
   gap: 20px;
@@ -297,7 +292,7 @@
   margin-top: 20px;
 }
 
-/* Menu Card */
+
 .menu-card {
   position: relative;
   padding: 20px;
@@ -334,7 +329,7 @@
   margin-bottom: 10px;
 }
 
-/* Buttons */
+
 .order-button,
 .edit-button,
 .delete-button {
@@ -369,7 +364,7 @@
 
 .delete-button:hover {
   background-color: #e57373;
-}
+} */
 
 /* Update Form */
 .update-form,

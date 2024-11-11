@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './MenuPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import WelCome from '../../components/welcome/WelCome';
+import hotelImage from '../../assets/OIP.jpeg';
 
 const MenuPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -12,7 +13,7 @@ const MenuPage = () => {
       id: 1,
       title: 'Margherita Pizza',
       price: '$12.99',
-      image: 'https://via.placeholder.com/150',
+      image: '',
       category: 'Pizza',
     },
     {
@@ -174,12 +175,16 @@ const MenuPage = () => {
         <div className="menu-grid">
           {filteredMenuItems.map((item) => (
             <div className="menu-card" key={item.id}>
-              <div className='img-card'>
-                <img src={item.image} alt={item.title} className="menu-image" />
+              <div className='card'>
+                <div className='img-card'>
+                  <img src={hotelImage} alt={item.title} className="menu-image" />
+                </div>
+                <div className='card-details'>
+                  <h3 className="menu-title">{item.title}</h3>
+                  <p className="menu-price">{item.price}</p>
+                  <button className="order-button">Order Now</button>
+                </div>
               </div>
-              <h3 className="menu-title">{item.title}</h3>
-              <p className="menu-price">{item.price}</p>
-              <button className="order-button">Order Now</button>
               {/* <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button> */}
               {/* <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button> */}
 

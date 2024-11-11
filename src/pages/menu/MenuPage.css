@@ -44,11 +44,27 @@ h2 {
 }
 
 .menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  max-width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* justify-items: center; */
   gap: 20px;
 }
-
+.card{
+  display: flex;
+  gap: 8px;
+  /* flex-wrap: wrap; */
+  max-width: 300px;
+  padding: 6px;
+}
+.card-details{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 140px;
+}
 .menu-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -61,15 +77,19 @@ h2 {
 .menu-card:hover {
   transform: scale(1.05);
 }
-
+.img-card{
+  width: 150px;
+}
 .menu-image {
   width: 100%;
   height: 150px;
   object-fit: cover;
+  border-radius: 6px;
 }
 
 .menu-title {
   font-size: 1.25rem;
+  color: rgb(56, 56, 56);
   margin: 10px;
 }
 
