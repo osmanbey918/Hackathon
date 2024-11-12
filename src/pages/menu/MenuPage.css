@@ -54,7 +54,6 @@ h2 {
 .card{
   display: flex;
   gap: 8px;
-  /* flex-wrap: wrap; */
   max-width: 300px;
   padding: 6px;
 }

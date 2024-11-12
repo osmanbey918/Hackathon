@@ -1,9 +1,12 @@
 // MenuPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MenuPage.css';
 import Navbar from '../../components/navbar/Navbar';
 import WelCome from '../../components/welcome/WelCome';
 import hotelImage from '../../assets/OIP.jpeg';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProductData, fetchProductData } from '../../store/slices/productSlice';
+import store from '../../store/store';
 
 const MenuPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +43,7 @@ const MenuPage = () => {
   ]);
 
   const [editItem, setEditItem] = useState(null);
-  const [newItem, setNewItem] = useState({ title: '', price: '', image: '', category: '' });
+  const [newItem, setNewItem] = useState({ title: '', price: '' });
 
   // Categories derived from menu items
   const categories = ['All', ...new Set(menuItems.map(item => item.category))];
@@ -77,16 +80,29 @@ const MenuPage = () => {
     setEditItem(null);
   };
 
-  const handleAddItem = (event) => {
+  // useEffect(fetchProductData())
+  const dispatch = useDispatch();
+  const productget = () => {
+  }
+
+  // const data = useSelector((store)=> store.state.product)
+  const handleAddItem = async (event) => {
     event.preventDefault();
     const newMenuItem = {
-      id: menuItems.length + 1, // Simple ID generation
+      // id: menuItems.length + 1, // Simple ID generation
       title: newItem.title,
       price: newItem.price,
-      image: newItem.image || 'https://via.placeholder.com/150', // Default image
-      category: newItem.category,
+      // image: newItem.image || 'https://via.placeholder.com/150', // Default image
+      // category: newItem.category,
     };
     setMenuItems([...menuItems, newMenuItem]);
+     await dispatch(addProductData({
+      title: newItem.title,
+      price: newItem.price,
+    }))
+    console.log([newMenuItem]);
+    // console.log(data);
+
     setNewItem({ title: '', price: '', image: '', category: '' }); // Reset new item input
   };
 
@@ -104,9 +120,9 @@ const MenuPage = () => {
           className="search-bar"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        /> */}
 
-        <select
+        {/* <select
           className="category-select"
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -114,9 +130,9 @@ const MenuPage = () => {
           {categories.map((category) => (
             <option key={category} value={category}>{category}</option>
           ))}
-        </select>
+        </select> */}
 
-        {editItem && (
+        {/* {editItem && (
           <form onSubmit={handleUpdate} className="update-form">
             <input
               type="text"
@@ -134,7 +150,7 @@ const MenuPage = () => {
             />
             <button type="submit">Update Item</button>
           </form>
-        )}
+        )} */}
 
         <form onSubmit={handleAddItem} className="add-item-form">
           <input
@@ -151,24 +167,24 @@ const MenuPage = () => {
             onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
             required
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Image URL (optional)"
             value={newItem.image}
             onChange={(e) => setNewItem({ ...newItem, image: e.target.value })}
-          />
-          <input
+          /> */}
+          {/* <input
             type="text"
             placeholder="Category"
             value={newItem.category}
             onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
             required
-          />
+          /> */}
           <button type="submit">Add New Item</button>
         </form>
 
 
-        {selectedCategory !== 'All' && (
+        {/* {selectedCategory !== 'All' && (
           <h3 className="category-heading">{selectedCategory}</h3>
         )} */}
 
@@ -185,8 +201,8 @@ const MenuPage = () => {
                   <button className="order-button">Order Now</button>
                 </div>
               </div>
-              {/* <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button> */}
-              {/* <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button> */}
+              <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button>
+              <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button>
 
             </div>
           ))}
