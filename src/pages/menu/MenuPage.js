@@ -11,6 +11,7 @@ import store from '../../store/store';
 const MenuPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const { products } = useSelector((state) => state.product)
   const [menuItems, setMenuItems] = useState([
     {
       id: 1,
@@ -41,6 +42,7 @@ const MenuPage = () => {
       category: 'Desserts',
     },
   ]);
+  const dispatch = useDispatch();
 
   const [editItem, setEditItem] = useState(null);
   const [newItem, setNewItem] = useState({ title: '', price: '' });
@@ -79,13 +81,10 @@ const MenuPage = () => {
     setMenuItems(updatedMenuItems);
     setEditItem(null);
   };
+  useEffect(() => {
+    dispatch(fetchProductData());
+  }, [dispatch]);
 
-  // useEffect(fetchProductData())
-  const dispatch = useDispatch();
-  const productget = () => {
-  }
-
-  // const data = useSelector((store)=> store.state.product)
   const handleAddItem = async (event) => {
     event.preventDefault();
     const newMenuItem = {
@@ -96,7 +95,7 @@ const MenuPage = () => {
       // category: newItem.category,
     };
     setMenuItems([...menuItems, newMenuItem]);
-     await dispatch(addProductData({
+    await dispatch(addProductData({
       title: newItem.title,
       price: newItem.price,
     }))
@@ -112,6 +111,7 @@ const MenuPage = () => {
         <Navbar />
         <WelCome />
       </div>
+    
       <div className="menu-container">
         <h2>Menu</h2>
         {/* <input
@@ -188,7 +188,7 @@ const MenuPage = () => {
           <h3 className="category-heading">{selectedCategory}</h3>
         )} */}
 
-        <div className="menu-grid">
+        {/* <div className="menu-grid">
           {filteredMenuItems.map((item) => (
             <div className="menu-card" key={item.id}>
               <div className='card'>
@@ -201,12 +201,43 @@ const MenuPage = () => {
                   <button className="order-button">Order Now</button>
                 </div>
               </div>
+              
+              </div>
+              ))}
               <button className="edit-button" onClick={() => handleEdit(item)}>Edit</button>
               <button className="delete-button" onClick={() => handleDelete(item.id)}>Delete</button>
+        </div> */}
 
+
+
+
+
+
+
+
+
+
+
+<div className='menu-grid'>
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div className='menu-card' key={product.id}>
+              <div className='card'>
+                <div className='img-card'>
+                  <img src={hotelImage} alt='here is my image' className="menu-image" />
+                </div>
+                <div className='card-details'>
+                  <h3 className='menu-title'>{product.title}</h3>
+                  <div className='menu-price'>{product.price}</div>
+                  <button className="order-button">Order Now</button>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
+      </div>
       </div>
     </div>
   );

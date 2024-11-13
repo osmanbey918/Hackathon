@@ -1,56 +1,66 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addDoc, collection, getDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore"; // Use getDocs for fetching all documents
 import { db } from "../../config/fireBaseConfig";
 
-
-
+// Fetch product data from Firestore
 export const fetchProductData = createAsyncThunk(
-    'product/fetchProductData',
-    async (_) => {
-        const productRef = await getDoc(collection(db, "products"));
-        return productRef.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
+    'Product/fetchProductData',
+    async (_, { rejectWithValue }) => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'products'));
+        return querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
         }));
-
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-)
+  
+  );
+
+// Add product data to Firestore
 export const addProductData = createAsyncThunk(
     'product/addProductData',
     async (data) => {
         try {
-            console.log('heloismsm');
-              const docRef = await addDoc(collection(db, "products"), data);
-            console.log(data, 'llllllll');
+            const docRef = await addDoc(collection(db, "products"), data);
             return { id: docRef.id, ...data };
-        }
-        catch (error) {
-            console.log('error');
+        } catch (error) {
+            console.error("Error adding document:", error);
+            throw error;
         }
     }
-)
-// const initialState = {
+);
 
-// }
 const productSlice = createSlice({
     name: "product",
     initialState: {
-        product: []
-
+        products: [],
+        status: 'idle',
+        error: null,
     },
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(addProductData.fulfilled, (state, action) => {
-                state.product.push(action.payload);
+            .addCase(fetchProductData.pending, (state) => {
+                state.status = 'loading';
             })
             .addCase(fetchProductData.fulfilled, (state, action) => {
-                state.product = action.payload;
+                state.status = 'succeeded';
+                state.products = action.payload;
             })
+            .addCase(fetchProductData.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(addProductData.fulfilled, (state, action) => {
+                state.products.push(action.payload);
+            })
+            .addCase(addProductData.rejected, (state, action) => {
+                state.error = action.error.message;
+            });
     }
-})
-
+});
 
 export default productSlice.reducer;
