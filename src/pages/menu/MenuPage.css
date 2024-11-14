@@ -30,9 +30,11 @@ h2 {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 5px;
-  background-color: #f8f9fa;
+  color: rgb(255, 255, 255);
+  background-color: rgba(47, 46, 46, 0.353);
+  /* backdrop-filter: blur(10px); */
 }
 
 .category-heading {
@@ -41,6 +43,8 @@ h2 {
   font-weight: bold;
   color: #333;
   text-align: center;
+  background-color: transparent;
+
 }
 
 .menu-grid {
