@@ -9,7 +9,9 @@ const MenuPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const { products } = useSelector((state) => state.product);
-  const { imageUrl } = useSelector((state) => state.product);
+  // const { imageUrl } = useSelector((state) => state.product);
+  // console.log(imageUrl);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,8 +31,8 @@ const MenuPage = () => {
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log(products.map((item) => item.category));
-  console.log(categories);
+  // console.log(products.map((item) => item.category));
+  // console.log(categories);
 
   // const handleDelete = (id) => {
   //   setproducts(products.filter(item => item.id !== id));
@@ -61,20 +63,22 @@ const MenuPage = () => {
   // Handle adding a new item
   const handleAddItem = async (event) => {
     event.preventDefault();
-  
+
     // Check if an image is selected
     if (newItem.img) {
       try {
         // Upload image first and get the URL
-         dispatch(uploadImage(newItem.img));
-        console.log(imageUrl);
-        
+        // await dispatch(uploadImage(newItem.img));
+        // console.log(imageUrl);
+        const uploadedUrl = await dispatch(uploadImage(newItem.img)).unwrap(); // Use unwrap for Thunk return values
+        // console.log("Uploaded image URL:", uploadedUrl);
+
         // Add the product after getting the image URL
         await dispatch(addProductData({
           title: newItem.title,
           price: newItem.price,
           category: newItem.category,
-          img: imageUrl, // Use the URL returned from Firebase
+          img: uploadedUrl, // Use the URL returned from Firebase
         }));
       } catch (error) {
         console.error("Error adding product:", error);
@@ -88,9 +92,9 @@ const MenuPage = () => {
         img: '', // Or a placeholder image URL if you prefer
       }));
     }
-  
+
     // Reset the form
-    setNewItem({ title: '', price: '', category: '', img: null });
+    setNewItem({ title: '', price: '', category: '', img: '' });
   };
 
   return (
@@ -182,7 +186,7 @@ const MenuPage = () => {
                   <div className='img-card'>
                     <img src={product.img || 'placeholder-image-url'} alt='Product' className="menu-image" />
                   </div>
-                    {console.log(product.img)}
+                  {console.log(product.img)}
                   <div className='card-details'>
                     <h3 className='menu-title'>{product.title}</h3>
                     <div className='menu-price'>{product.price}$</div>
