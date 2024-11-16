@@ -60,7 +60,7 @@ export const login = createAsyncThunk(
             // console.log("userCredential in login", userCredential.user.uid);
             const docSnap = await getDoc(doc(db, "customers", userCredential.user.uid))
             const dbUser = docSnap?.data()
-            // console.log("dbUser", dbUser);
+            console.log("dbUser", dbUser);
             return dbUser
         } catch (error) {
             console.log("error", error);

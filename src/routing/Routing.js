@@ -13,8 +13,8 @@ import About from "../pages/about/About";
 
 const router = createBrowserRouter([
   {
-    path: "/signup",
-    element: <PublicRoute><Home /></PublicRoute>,
+    path: "/",
+    element: <PrivateRoute><Home /></PrivateRoute>,
   },
   {
     path: "/signup",
@@ -29,12 +29,12 @@ const router = createBrowserRouter([
     element: <PublicRoute><ContactUs /></PublicRoute>
   },
   {
-    path: "/",
-    element: <PublicRoute><MenuPage /></PublicRoute>
+    path: "/menupage",
+    element: <PrivateRoute><MenuPage /></PrivateRoute>
   },
   {
     path: "/about",
-    element: <PublicRoute><About/></PublicRoute>
+    element: <PublicRoute><About /></PublicRoute>
   },
 ]);
 
