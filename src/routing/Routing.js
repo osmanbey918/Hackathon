@@ -13,11 +13,11 @@ import About from "../pages/about/About";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <PrivateRoute><Home /></PrivateRoute>,
   },
   {
-    path: "/signup",
+    path: "/",
     element: <PublicRoute><Signup /></PublicRoute>
   },
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/ContectUs",
-    element: <PublicRoute><ContactUs /></PublicRoute>
+    element: <PrivateRoute><ContactUs /></PrivateRoute>
   },
   {
     path: "/menupage",
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <PublicRoute><About /></PublicRoute>
+    element: <PrivateRoute><About /></PrivateRoute>
   },
 ]);
 
