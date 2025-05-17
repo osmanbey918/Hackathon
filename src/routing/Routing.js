@@ -1,45 +1,55 @@
-// import {
-//   createBrowserRouter,
-//   RouterProvider,
-// } from "react-router-dom";
-// import PrivateRoute from "./PrivateRoute";
-// import Home from "../pages/home/Home";
-// import Signup from "../pages/signup/SignUp";
-// import Login from "../pages/login/Login";
-// import PublicRoute from "./PublicRoute";
-// import ContactUs from "../pages/contectus/ContactUs";
-// import MenuPage from "../pages/menu/MenuPage";
-// import About from "../pages/about/About";
+import React, { lazy, Suspense } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/home",
-//     element: <PrivateRoute><Home /></PrivateRoute>,
-//   },
-//   {
-//     path: "/",
-//     element: <PublicRoute><Signup /></PublicRoute>
-//   },
-//   {
-//     path: "/login",
-//     element: <PublicRoute><Login /></PublicRoute>
-//   },
-//   {
-//     path: "/ContectUs",
-//     element: <PrivateRoute><ContactUs /></PrivateRoute>
-//   },
-//   {
-//     path: "/menupage",
-//     element: <PrivateRoute><MenuPage /></PrivateRoute>
-//   },
-//   {
-//     path: "/about",
-//     element: <PrivateRoute><About /></PrivateRoute>
-//   },
-// ]);
+// Lazy load heavy pages
+const Home = lazy(() => import("../pages/home/Home"));
+const Signup = lazy(() => import("../pages/signup/SignUp"));
+const Login = lazy(() => import("../pages/login/Login"));
+const ContactUs = lazy(() => import("../pages/contectus/ContactUs"));
+const MenuPage = lazy(() => import("../pages/menu/MenuPage"));
+const About = lazy(() => import("../pages/about/About"));
+const UserDashboard = lazy(() => import("../pages/user/UserDashboard"));
+const AdminDashboard = lazy(() => import("../pages/admin/AdminDashboard"));
 
-// export default function Routing(params) {
-//   return (
-//     <RouterProvider router={router} />
-//   )
-// }
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PublicRoute><Signup /></PublicRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PublicRoute><Login /></PublicRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/home",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute><Home /></PrivateRoute>
+      </Suspense>
+    ),
+    children: [
+      { path: "menu", element: <Suspense fallback={<div>Loading...</div>}><MenuPage /></Suspense> },
+      { path: "about", element: <Suspense fallback={<div>Loading...</div>}><About /></Suspense> },
+      { path: "contact", element: <Suspense fallback={<div>Loading...</div>}><ContactUs /></Suspense> },
+      { path: "user", element: <PrivateRoute role="user"><UserDashboard /></PrivateRoute> },
+      { path: "admin", element: <PrivateRoute role="admin"><AdminDashboard /></PrivateRoute> },
+    ],
+  },
+]);
+
+export default function Routing() {
+  return <RouterProvider router={router} />;
+}

@@ -4,13 +4,14 @@ import Navbar from '../../components/navbar/Navbar';
 import WelCome from '../../components/welcome/WelCome';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductData, fetchProductData, uploadImage } from '../../store/slices/productSlice';
+import MenuItemCard from '../../components/menu/MenuItemCard';
+import Cart from '../../components/menu/Cart';
+import { addToCart } from '../../store/slices/cartSlice';
 
 const MenuPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const { products } = useSelector((state) => state.product);
-  // const { imageUrl } = useSelector((state) => state.product);
-  // console.log(imageUrl);
 
   const dispatch = useDispatch();
 
@@ -31,17 +32,6 @@ const MenuPage = () => {
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // console.log(products.map((item) => item.category));
-  // console.log(categories);
-
-  // const handleDelete = (id) => {
-  //   setproducts(products.filter(item => item.id !== id));
-  // };
-
-  // const handleEdit = (item) => {
-  //   setEditItem(item);
-  // };
-
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedItem = {
@@ -52,11 +42,6 @@ const MenuPage = () => {
       category: editItem.category,
     };
 
-    // const updatedMenuItems = menuItems.map(item =>
-    //   item.id === editItem.id ? updatedItem : item
-    // );
-
-    // setMenuItems(updatedMenuItems);
     setEditItem(null);
   };
 
@@ -68,10 +53,7 @@ const MenuPage = () => {
     if (newItem.img) {
       try {
         // Upload image first and get the URL
-        // await dispatch(uploadImage(newItem.img));
-        // console.log(imageUrl);
         const uploadedUrl = await dispatch(uploadImage(newItem.img)).unwrap(); // Use unwrap for Thunk return values
-        // console.log("Uploaded image URL:", uploadedUrl);
 
         // Add the product after getting the image URL
         await dispatch(addProductData({
@@ -95,6 +77,11 @@ const MenuPage = () => {
 
     // Reset the form
     setNewItem({ title: '', price: '', category: '', img: '' });
+  };
+
+  // Add to cart handler
+  const handleOrder = (product) => {
+    dispatch(addToCart(product));
   };
 
   return (
@@ -181,24 +168,13 @@ const MenuPage = () => {
         <div className='menu-grid'>
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
-              <div className='menu-card' key={product.id}>
-                <div className='card'>
-                  <div className='img-card'>
-                    <img src={product.img || 'placeholder-image-url'} alt='Product' className="menu-image" />
-                  </div>
-                  {console.log(product.img)}
-                  <div className='card-details'>
-                    <h3 className='menu-title'>{product.title}</h3>
-                    <div className='menu-price'>{product.price}$</div>
-                    <button className="order-button">Order Now</button>
-                  </div>
-                </div>
-              </div>
+              <MenuItemCard key={product.id} product={product} onOrder={() => handleOrder(product)} />
             ))
           ) : (
             <p>No products available.</p>
           )}
         </div>
+        <Cart />
       </div>
     </div>
   );

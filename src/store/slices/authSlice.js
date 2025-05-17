@@ -35,7 +35,8 @@ export const signup = createAsyncThunk(
                 phone: user.phone,
                 address: user.address,
                 gender: user.gender,
-                uid: userCredential.user.uid
+                uid: userCredential.user.uid,
+                role: user.role || 'user' // default to 'user', allow admin registration if needed
             }
             console.log(saveUserTodb);
             
@@ -53,13 +54,12 @@ export const signup = createAsyncThunk(
 export const login = createAsyncThunk(
     'auth/login',
     async (user) => {
-        
         try {
-            // console.log("user", user);
             const userCredential = await signInWithEmailAndPassword(auth, user.email, user.password)
-            // console.log("userCredential in login", userCredential.user.uid);
             const docSnap = await getDoc(doc(db, "customers", userCredential.user.uid))
             const dbUser = docSnap?.data()
+            // Ensure role is present
+            if (!dbUser.role) dbUser.role = 'user';
             console.log("dbUser", dbUser);
             return dbUser
         } catch (error) {
@@ -82,7 +82,7 @@ export const logout = createAsyncThunk(
 )
 
 const initialState = {
-    user: null,
+    user: null, // should include role, e.g. { ...user, role: 'user' | 'admin' }
     loading: false
 }
 

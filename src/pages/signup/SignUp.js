@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../store/slices/authSlice";
 import { useNavigate } from 'react-router-dom';
+import AuthForm from '../../components/AuthForm';
 import Loading from "../../components/loading/Loading";
 
 
@@ -17,15 +18,24 @@ export default function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    const user = { email, password, name, phone, address, gender };
+  const fields = [
+    { name: 'email', type: 'text', placeholder: 'Enter email', required: true },
+    { name: 'password', type: 'password', placeholder: 'Enter password', required: true },
+    { name: 'name', type: 'text', placeholder: 'Enter name', required: true },
+    { name: 'phone', type: 'text', placeholder: 'Enter phone number', required: true },
+    { name: 'address', type: 'text', placeholder: 'Enter address', required: true },
+    { name: 'gender', type: 'radio', options: [
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' }
+    ], required: true, className: 'gender-section' },
+  ];
 
+  const handleSignup = async (formData) => {
     try {
-      await dispatch(signup(user)).unwrap();
+      await dispatch(signup(formData)).unwrap();
       navigate('/login');
     } catch (error) {
-      console.error("Signup failed:", error);
+      console.error('Signup failed:', error);
     }
   };
 
@@ -34,73 +44,14 @@ export default function Signup() {
       <h1 className="hotel-name">Dubai Restaurant</h1>
       <div className="signup-box">
         <h2>Signup</h2>
-        <button onClick={() => navigate('/login')} className="l-btn">Login</button>
-        <form onSubmit={handleSignup}>
-          <input
-            type="text"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="input-field"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="input-field"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Enter address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="input-field"
-            required
-          />
-          <div className="gender-section">
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                onChange={() => setGender('male')}
-                required
-              />
-              Male
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                onChange={() => setGender('female')}
-                required
-              />
-              Female
-            </label>
-          </div>
-          <button type="submit" className="signup-button">Signup</button>
-          {loading && <Loading />}
-        </form>
+        <AuthForm
+          fields={fields}
+          onSubmit={handleSignup}
+          submitLabel="Signup"
+          loading={loading}
+          switchLabel="Login"
+          onSwitch={() => navigate('/login')}
+        />
       </div>
     </div>
   );
