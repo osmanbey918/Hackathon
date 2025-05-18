@@ -40,13 +40,46 @@ const router = createBrowserRouter([
         <PrivateRoute><Home /></PrivateRoute>
       </Suspense>
     ),
-    children: [
-      { path: "menu", element: <Suspense fallback={<div>Loading...</div>}><MenuPage /></Suspense> },
-      { path: "about", element: <Suspense fallback={<div>Loading...</div>}><About /></Suspense> },
-      { path: "contact", element: <Suspense fallback={<div>Loading...</div>}><ContactUs /></Suspense> },
-      { path: "user", element: <PrivateRoute role="user"><UserDashboard /></PrivateRoute> },
-      { path: "admin", element: <PrivateRoute role="admin"><AdminDashboard /></PrivateRoute> },
-    ],
+  },
+  {
+    path: "/menu",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute><MenuPage /></PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute><About /></PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/contact",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute><ContactUs /></PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/user",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute role="user"><UserDashboard /></PrivateRoute>
+      </Suspense>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>
+      </Suspense>
+    ),
   },
 ]);
 

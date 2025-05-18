@@ -1,5 +1,6 @@
 // Home.js
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
 import Navbar from '../../components/navbar/Navbar';
@@ -12,11 +13,9 @@ import WelCome from '../../components/welcome/WelCome';
 export default function Home() {
   return (
     <div className="home-container">
-      <MenuPage />
-        <div className='abou'>
-          <About />
-        </div>
-        <ContactUs />
+      <Navbar />
+      {/* Render nested routes here */}
+      <Outlet />
     </div>
   );
 }

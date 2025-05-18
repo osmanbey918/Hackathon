@@ -19,8 +19,14 @@ export default function Login() {
     { name: 'password', type: 'password', placeholder: 'Enter password', required: true },
   ];
 
-  const handleLogin = (formData) => {
-    dispatch(login(formData));
+  const handleLogin = async (formData) => {
+    try {
+      await dispatch(login(formData)).unwrap();
+      navigate('/home');
+    } catch (error) {
+      // Optionally show error to user
+      console.error('Login failed:', error);
+    }
   };
 
   return (
