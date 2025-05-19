@@ -2,6 +2,10 @@
 
 A modern, full-stack restaurant web application built with React, Redux Toolkit, and Firebase. This project allows users to browse a menu, place orders, manage their cart, and provides admin and user dashboards. The app features authentication, real-time menu management, and a beautiful, responsive UI.
 
+## Live Demo
+
+[View the live app here](https://osmanbey918.github.io/Hackathon)
+
 ## Features
 
 - **User Authentication**: Sign up, log in, and log out with Firebase Auth.
