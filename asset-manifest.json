@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Hackathon/static/css/main.fb1f420c.css",
+    "main.js": "/Hackathon/static/js/main.95aad048.js",
+    "static/js/453.d4874553.chunk.js": "/Hackathon/static/js/453.d4874553.chunk.js",
+    "static/media/hotel-bg.jpg": "/Hackathon/static/media/hotel-bg.45f31b1d441baf7074ec.jpg",
+    "index.html": "/Hackathon/index.html",
+    "main.fb1f420c.css.map": "/Hackathon/static/css/main.fb1f420c.css.map",
+    "main.95aad048.js.map": "/Hackathon/static/js/main.95aad048.js.map",
+    "453.d4874553.chunk.js.map": "/Hackathon/static/js/453.d4874553.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fb1f420c.css",
+    "static/js/main.95aad048.js"
+  ]
+}
