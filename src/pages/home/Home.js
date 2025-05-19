@@ -15,7 +15,11 @@ export default function Home() {
     <div className="home-container">
       <Navbar />
       {/* Render nested routes here */}
-      <Outlet />
+      {/* <Outlet /> */}
+      <MenuPage />
+      <About />
+      <ContactUs />
+      
     </div>
   );
 }

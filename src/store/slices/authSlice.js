@@ -7,18 +7,17 @@ import Loading from "../../components/loading/Loading";
 
 
 export const getCurrentUser = createAsyncThunk(
-    "auth/currentUser",
-    async () => {
+    "auth/getCurrentUser",
+    async (_, { rejectWithValue }) => {
         try {
             const user = auth.currentUser;
-            if (user) {
-                return user
-            }
-
+            if (!user) return null;
+            // Fetch user profile from Firestore
+            const docSnap = await getDoc(doc(db, "customers", user.uid));
+            return docSnap.exists() ? docSnap.data() : null;
         } catch (error) {
-
+            return rejectWithValue(error.message);
         }
-
     }
 )
 
@@ -91,7 +90,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user = action.payload
+            state.user = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -137,7 +136,6 @@ const authSlice = createSlice({
                 state.loading = false;
             });
     }
-
 });
 
 export const { setUser } = authSlice.actions

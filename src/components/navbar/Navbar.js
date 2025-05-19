@@ -1,17 +1,24 @@
 // Navbar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, getCurrentUser } from '../../store/slices/authSlice';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getCurrentUser());
+    }
+  }, [user, dispatch]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -35,10 +42,10 @@ const Navbar = () => {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/menupage">Menu</Link>
+            <Link to="/menu">Menu</Link>
           </li>
           <li>
-            <Link to="/ContectUs">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </li>
           <li><button onClick={handleLogout} className="logout-button">Logout</button></li>
         </ul>

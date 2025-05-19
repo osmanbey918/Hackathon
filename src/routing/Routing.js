@@ -1,88 +1,28 @@
-import React, { lazy, Suspense } from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
-
-// Lazy load heavy pages
-const Home = lazy(() => import("../pages/home/Home"));
-const Signup = lazy(() => import("../pages/signup/SignUp"));
-const Login = lazy(() => import("../pages/login/Login"));
-const ContactUs = lazy(() => import("../pages/contectus/ContactUs"));
-const MenuPage = lazy(() => import("../pages/menu/MenuPage"));
-const About = lazy(() => import("../pages/about/About"));
-const UserDashboard = lazy(() => import("../pages/user/UserDashboard"));
-const AdminDashboard = lazy(() => import("../pages/admin/AdminDashboard"));
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PublicRoute><Signup /></PublicRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/login",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PublicRoute><Login /></PublicRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/home",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute><Home /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/menu",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute><MenuPage /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/about",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute><About /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/contact",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute><ContactUs /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/user",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute role="user"><UserDashboard /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-  {
-    path: "/admin",
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>
-      </Suspense>
-    ),
-  },
-]);
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Home from '../pages/home/Home';
+import Signup from '../pages/signup/SignUp';
+import Login from '../pages/login/Login';
+import ContactUs from '../pages/contectus/ContactUs';
+import MenuPage from '../pages/menu/MenuPage';
+import About from '../pages/about/About';
+import UserDashboard from '../pages/user/UserDashboard';
+import AdminDashboard from '../pages/admin/AdminDashboard';
 
 export default function Routing() {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/user" element={<UserDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

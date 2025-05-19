@@ -1,7 +1,7 @@
 // ContactUs.js
 import React, { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
-
+import './ContactUs.css'; // Import your CSS file for styling
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: '',

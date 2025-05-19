@@ -87,7 +87,7 @@ const MenuPage = () => {
   return (
     <div className='bgg'>
       <div className='wel-bg'>
-        <Navbar />
+        {/* <Navbar /> */}
         <WelCome />
       </div>
 
